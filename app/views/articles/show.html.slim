@@ -1,0 +1,48 @@
+== content_for :title, @article.title
+== render 'layouts/light_navbar'
+#cover
+  .background
+  header
+    h2
+      = link_to @article.first_category.name, category_path(@article.first_category) unless @article.first_category.nil?
+    h1
+      = @article.title
+    span
+      | Posted by
+      span
+        = link_to 'Yoyo Coder', about_path
+      i.fa.fa-clock-o
+      = link_to date_to_s(@article.created_at), '#'
+      |.
+  .top-sidebar
+    = render 'right_sidebar_top'
+== render 'layouts/home_button'
+== render 'layouts/fixed_header'
+
+.bottom-sidebar
+  == render 'right_sidebar_bottom'
+
+section.posts.wrapper#content
+  .article.border-bottom-gray
+    .text
+      = markdown @article.text
+  .profile-bottom.border-bottom-gray
+    = image_tag 'me.jpg', class: 'avatar'
+    .info
+      h4 Yoyo Coder
+      p If you think you can, you can.
+      = social_share_button_tag(@article.title, url: article_url(@article), popup: 'true', via: 'Yoyo Coder')
+
+coffee:
+  $ ->
+    new Waypoint
+      element: $('#content')[0]
+      handler: (direction) ->
+        if direction == 'down'
+          $('#fixed-header').fadeIn()
+          if $('.right-sidebar-bottom').length then $('.bottom-sidebar').fadeIn()
+          if $('.right-sidebar-top').length then $('.top-sidebar').fadeOut()
+        else
+          $('#fixed-header').fadeOut()
+          if $('.right-sidebar-bottom').length then $('.bottom-sidebar').fadeOut()
+          if $('.right-sidebar-top').length then $('.top-sidebar').fadeIn()

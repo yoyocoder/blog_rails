@@ -1,0 +1,28 @@
+== render 'layouts/dark_navbar'
+section.wrapper
+  .articles
+    - @articles.each do |article|
+      .article
+        .feature
+          span Featured
+          i.fa.fa-bookmark.fa-lg
+        h2
+          = link_to article.first_category.name, category_path(article.first_category) unless article.first_category.nil?
+        h1
+          = link_to article.title, article_path(article), class: 'blog-title'
+        span
+          | Posted by
+          span
+            = link_to about_path do
+              = image_tag 'me.jpg'
+              | Yoyo Coder
+          i.fa.fa-clock-o
+          = link_to date_to_s(article.created_at), '#'
+          |.
+        .text
+          = markdown truncate(article.text, length: 400)
+  - if @articles.length > 10
+    .paginator.border-bottom-gray
+      span.left= link_to_previous_page @articles, 'Newer Posts'
+      span.right= link_to_next_page @articles, 'Older Posts'
+== render 'layouts/right_sidebar'

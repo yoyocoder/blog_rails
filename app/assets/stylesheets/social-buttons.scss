@@ -1,0 +1,25 @@
+.social-share-button-twitter,
+.social-share-button-facebook,
+.social-share-button-google_plus,
+.social-share-button-linkedin {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.social-share-button-twitter {
+  background: image-url('twitter.svg');
+}
+
+.social-share-button-facebook {
+  background: image-url('facebook.svg');
+}
+
+.social-share-button-google_plus {
+  background: image-url('google-plus.svg');
+}
+
+.social-share-button-linkedin {
+  background: image-url('linkedin.svg');
+}

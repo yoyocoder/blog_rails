@@ -1,0 +1,10 @@
+.right-sidebar-bottom
+  = image_tag 'me.jpg'
+  h2 Yoyo Coder
+  p ...
+  hr
+  h3 LASTEST POSTS
+  .recent-articles
+    - Article.most_recent.each do |article|
+      = link_to article.title, article_path(article)
+      p= date_to_s(article.created_at)
